@@ -14,7 +14,11 @@ export default function Navbar() {
         {/* Lado Izquierdo: Menú simple */}
         <div className="hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-widest text-slate-600">
           <Link href="/" className="hover:text-black transition-colors">Inicio</Link>
-          <Link href="#" className="hover:text-black transition-colors">Colecciones</Link>
+          
+          {/* CAMBIO REALIZADO: Vinculamos a la ruta de colecciones */}
+          <Link href="/collections" className="hover:text-black transition-colors">
+            Colecciones
+          </Link>
         </div>
 
         {/* Centro: Logo */}
