@@ -2,46 +2,85 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-300 py-20 px-8 mt-20">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-        {/* Columna 1: Branding */}
-        <div className="col-span-1 md:col-span-2">
-          <h2 className="text-3xl font-black text-white mb-6 tracking-tighter">
-            AURA<span className="text-emerald-500">.</span>
-          </h2>
-          <p className="max-w-xs text-slate-400 leading-relaxed">
+    <footer className="bg-white border-t border-stone-100 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+        
+        {/* Sección de Marca - Branding en Negro y Verde */}
+        <div className="space-y-6">
+          <Link href="/" className="inline-block">
+            <span className="text-3xl font-black text-slate-900 tracking-tighter uppercase italic">
+              Aura<span className="text-emerald-600">.</span>
+            </span>
+          </Link>
+          <p className="text-stone-500 text-sm leading-relaxed max-w-xs italic font-medium">
             Elevando tu estilo cotidiano con prendas premium diseñadas para durar. 
             Calidad, confort y elegancia en cada costura.
           </p>
         </div>
 
-        {/* Columna 2: Links Rápidos */}
+        {/* Enlaces de Tienda - Paleta Café (Stone) con Hover Verde */}
         <div>
-          <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-sm">Tienda</h4>
-          <ul className="space-y-4 text-sm">
-            <li><Link href="/" className="hover:text-emerald-400 transition-colors">Todos los productos</Link></li>
-            <li><Link href="#" className="hover:text-emerald-400 transition-colors">Nueva Colección</Link></li>
-            <li><Link href="#" className="hover:text-emerald-400 transition-colors">Best Sellers</Link></li>
+          <h4 className="text-slate-900 font-black uppercase tracking-[0.2em] text-xs mb-8">Tienda</h4>
+          <ul className="space-y-4">
+            <li>
+              <Link href="/productos" className="text-stone-400 hover:text-emerald-600 text-xs font-bold uppercase tracking-widest transition-colors">
+                Todos los productos
+              </Link>
+            </li>
+            <li>
+              <Link href="/nueva-coleccion" className="text-stone-400 hover:text-emerald-600 text-xs font-bold uppercase tracking-widest transition-colors">
+                Nueva Colección
+              </Link>
+            </li>
+            <li>
+              <Link href="/best-sellers" className="text-stone-400 hover:text-emerald-600 text-xs font-bold uppercase tracking-widest transition-colors">
+                Best Sellers
+              </Link>
+            </li>
           </ul>
         </div>
 
-        {/* Columna 3: Soporte */}
+        {/* Sección de Ayuda */}
         <div>
-          <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-sm">Ayuda</h4>
-          <ul className="space-y-4 text-sm">
-            <li><Link href="#" className="hover:text-emerald-400 transition-colors">Envíos y Entregas</Link></li>
-            <li><Link href="#" className="hover:text-emerald-400 transition-colors">Cambios y Devoluciones</Link></li>
-            <li><Link href="#" className="hover:text-emerald-400 transition-colors">Contacto</Link></li>
+          <h4 className="text-slate-900 font-black uppercase tracking-[0.2em] text-xs mb-8">Ayuda</h4>
+          <ul className="space-y-4">
+            <li>
+              <Link href="/envios" className="text-stone-400 hover:text-emerald-600 text-xs font-bold uppercase tracking-widest transition-colors">
+                Envíos y Entregas
+              </Link>
+            </li>
+            <li>
+              <Link href="/devoluciones" className="text-stone-400 hover:text-emerald-600 text-xs font-bold uppercase tracking-widest transition-colors">
+                Cambios y Devoluciones
+              </Link>
+            </li>
+            <li>
+              <Link href="/contacto" className="text-stone-400 hover:text-emerald-600 text-xs font-bold uppercase tracking-widest transition-colors">
+                Contacto
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto border-t border-slate-800 mt-20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium uppercase tracking-widest text-slate-500">
-        <p>© 2026 Aura Boutique. Todos los derechos reservados.</p>
-        <div className="flex gap-8">
-          <Link href="#" className="hover:text-white transition-colors text-emerald-600 font-bold">Hecho por Juan David Dragon</Link>
-          <Link href="#" className="hover:text-white transition-colors">Privacidad</Link>
-          <Link href="#" className="hover:text-white transition-colors">Términos</Link>
+      {/* Barra Inferior - Minimalismo en Blanco y Verde */}
+      <div className="max-w-7xl mx-auto px-6 pt-10 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p className="text-[10px] text-stone-300 font-black uppercase tracking-[0.3em]">
+          &copy; 2026 AURA BOUTIQUE. TODOS LOS DERECHOS RESERVADOS.
+        </p>
+        
+        <div className="flex flex-wrap justify-center gap-8 items-center">
+          <span className="text-[10px] text-emerald-600 font-black uppercase tracking-[0.2em] bg-emerald-50 px-4 py-1 rounded-full">
+            Hecho por Juan David Rianho
+          </span>
+          <div className="flex gap-4">
+            <Link href="/privacidad" className="text-[10px] text-stone-300 hover:text-slate-900 font-bold uppercase tracking-widest transition-colors">
+              Privacidad
+            </Link>
+            <Link href="/terminos" className="text-[10px] text-stone-300 hover:text-slate-900 font-bold uppercase tracking-widest transition-colors">
+              Términos
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

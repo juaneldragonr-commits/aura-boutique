@@ -2,7 +2,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 interface CartItem {
-  id: string;
+  id: string | number;
   title: string;
   price: number;
   image: string;
@@ -13,11 +13,12 @@ interface CartItem {
 interface CartContextType {
   cart: CartItem[];
   addToCart: (product: any) => void;
-  removeFromCart: (id: string) => void;
-  updateQuantity: (id: string, quantity: number) => void; // Nueva: Control de cantidades
-  clearCart: () => void; // Nueva: Vaciar carrito tras compra
+  removeFromCart: (id: string | number) => void;
+  updateQuantity: (id: string | number, quantity: number) => void;
+  clearCart: () => void;
   totalItems: number;
-  totalPrice: number; // Nueva: Suma total de la compra
+  totalPrice: number;
+  isMounted: boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -26,20 +27,21 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isMounted, setIsMounted] = useState(false);
 
-  // 1. Cargar datos del localStorage al montar
+  // 1. Cargar datos del localStorage al montar con manejo de errores robusto
   useEffect(() => {
-    const savedCart = localStorage.getItem("aura-cart");
-    if (savedCart) {
-      try {
+    try {
+      const savedCart = localStorage.getItem("aura-cart");
+      if (savedCart) {
         setCart(JSON.parse(savedCart));
-      } catch (error) {
-        console.error("Error cargando el carrito:", error);
       }
+    } catch (error) {
+      console.error("Error cargando el carrito del almacenamiento:", error);
+    } finally {
+      setIsMounted(true);
     }
-    setIsMounted(true);
   }, []);
 
-  // 2. Guardar en localStorage cada vez que el carrito cambie
+  // 2. Guardar en localStorage de forma sincronizada cada vez que el carrito cambie
   useEffect(() => {
     if (isMounted) {
       localStorage.setItem("aura-cart", JSON.stringify(cart));
@@ -47,45 +49,54 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [cart, isMounted]);
 
   const addToCart = (product: any) => {
+    // Verificación de seguridad: si no hay producto o ID, ignorar
+    if (!product || !product.id) {
+      console.error("Producto inválido intentado añadir al carrito", product);
+      return;
+    }
+
     setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
+      const productId = product.id;
+      const existingItem = prevCart.find((item) => item.id === productId);
       
+      let updatedCart;
+
       if (existingItem) {
-        return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        updatedCart = prevCart.map((item) =>
+          item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
         );
+      } else {
+        // Normalización para asegurar tipos de datos correctos
+        const price = product.priceRange 
+          ? parseFloat(product.priceRange.minVariantPrice.amount) 
+          : (typeof product.price === 'string' ? parseFloat(product.price) : product.price);
+
+        const image = product.images?.nodes 
+          ? product.images.nodes[0]?.url 
+          : (product.image?.url || product.image);
+
+        const newItem: CartItem = {
+          id: productId,
+          title: product.title || "Producto sin título",
+          price: price || 0,
+          image: image || "",
+          handle: product.handle || "",
+          quantity: 1,
+        };
+        updatedCart = [...prevCart, newItem];
       }
 
-      // Normalización de datos (Soporta MOCK y API de Platzi)
-      const price = product.priceRange 
-        ? parseFloat(product.priceRange.minVariantPrice.amount) 
-        : product.price;
-
-      const image = product.images?.nodes 
-        ? product.images.nodes[0]?.url 
-        : product.image;
-
-      return [
-        ...prevCart,
-        {
-          id: product.id,
-          title: product.title,
-          price: price,
-          image: image,
-          handle: product.handle,
-          quantity: 1,
-        },
-      ];
+      console.log("Estado actualizado del carrito:", updatedCart); // Para confirmación en DevTools
+      return updatedCart;
     });
   };
 
-  const removeFromCart = (id: string) => {
+  const removeFromCart = (id: string | number) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Función para actualizar cantidad directamente (ej: botones + y - en el carrito)
-  const updateQuantity = (id: string, quantity: number) => {
-    if (quantity < 1) return; // Evita cantidades negativas
+  const updateQuantity = (id: string | number, quantity: number) => {
+    if (quantity < 1) return;
     setCart((prev) =>
       prev.map((item) => (item.id === id ? { ...item, quantity } : item))
     );
@@ -93,9 +104,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = () => {
     setCart([]);
+    localStorage.removeItem("aura-cart");
   };
 
-  // Cálculos automáticos
+  // Cálculos derivados del estado
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
   const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -108,7 +120,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
         updateQuantity, 
         clearCart, 
         totalItems, 
-        totalPrice 
+        totalPrice,
+        isMounted 
       }}
     >
       {children}

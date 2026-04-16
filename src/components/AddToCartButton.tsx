@@ -1,19 +1,29 @@
 'use client';
 
 import React from 'react';
+import { useCart } from '@/src/context/CartContext'; // Importamos el hook del contexto
 
 interface Product {
-  id: string;
+  id: string | number;
   title: string;
   price: number;
   image: string;
+  handle?: string; // Añadido opcional para compatibilidad
 }
 
-export default function AddToCartButton({ product }: { product: Product }) {
+export default function AddToCartButton({ product }: { product: any }) {
+  // Extraemos la función addToCart del contexto global
+  const { addToCart } = useCart();
+
   const handleAdd = () => {
-    // Aquí irá luego la lógica de tu context de carrito
-    console.log("Añadido al carrito:", product.title);
-    alert(`${product.title} se ha añadido al carrito.`);
+    // 1. Ejecutamos la lógica global para actualizar el carrito y localStorage
+    addToCart(product);
+
+    // 2. Mantenemos el log para confirmar que el evento se dispara
+    console.log("Enviando al contexto global:", product.title);
+    
+    // Opcional: Puedes quitar el alert para que la experiencia sea más fluida
+    // alert(`${product.title} se ha añadido al carrito.`);
   };
 
   return (

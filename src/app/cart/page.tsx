@@ -5,19 +5,31 @@ import Link from "next/link";
 import { Trash2, ArrowLeft, ShoppingBag, Plus, Minus } from "lucide-react";
 
 export default function CartPage() {
-  const { cart, removeFromCart, updateQuantity, totalItems, totalPrice } = useCart();
+  const { cart, removeFromCart, updateQuantity, totalItems, totalPrice, isMounted } = useCart();
+
+  // Evita errores de hidratación al cargar localStorage
+  if (!isMounted) return null;
 
   if (cart.length === 0) {
     return (
-      <main className="min-h-[80vh] flex flex-col items-center justify-center p-8 text-center">
-        <div className="bg-slate-100 p-6 rounded-full mb-6">
-          <ShoppingBag size={48} className="text-slate-400" />
+      <main className="min-h-[85vh] flex flex-col items-center justify-center p-8 text-center bg-white">
+        {/* Icono con fondo café muy suave (stone) */}
+        <div className="bg-stone-50 p-8 rounded-full mb-8 border border-stone-100">
+          <ShoppingBag size={64} className="text-stone-300" />
         </div>
-        <h1 className="text-3xl font-black text-slate-900 mb-2">Tu carrito está vacío</h1>
-        <p className="text-slate-500 mb-8 text-lg">Parece que aún no has añadido nada a tu colección.</p>
+        
+        {/* Título en Negro con acento Verde Esmeralda */}
+        <h1 className="text-4xl font-black text-slate-900 mb-3 uppercase tracking-tighter italic">
+          Tu carrito está <span className="text-emerald-600">vacío</span>
+        </h1>
+        <p className="text-stone-500 mb-10 text-lg max-w-md leading-relaxed">
+          Parece que aún no has añadido ninguna pieza de nuestra colección premium a tu selección.
+        </p>
+
+        {/* Botón en Verde Esmeralda */}
         <Link 
           href="/" 
-          className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-emerald-600 transition-all shadow-lg"
+          className="bg-emerald-600 text-white px-12 py-5 rounded-full font-bold uppercase tracking-[0.2em] hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-100 hover:scale-105 active:scale-95 text-sm"
         >
           Explorar Tienda
         </Link>
@@ -26,91 +38,108 @@ export default function CartPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-28 pb-12 px-6 lg:px-20">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex items-center gap-4 mb-12">
-          <Link href="/" className="p-2 hover:bg-white rounded-full transition-colors border border-transparent hover:border-slate-200">
-            <ArrowLeft size={24} />
+    <main className="min-h-screen bg-white pt-32 pb-20 px-6 lg:px-20">
+      <div className="max-w-7xl mx-auto">
+        {/* Encabezado con tonos café y negro */}
+        <div className="flex items-center gap-6 mb-16 border-b border-stone-100 pb-8">
+          <Link href="/" className="group p-3 hover:bg-stone-50 rounded-full transition-all border border-stone-100 shadow-sm">
+            <ArrowLeft size={24} className="text-stone-600 group-hover:-translate-x-1 transition-transform" />
           </Link>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tighter uppercase">Tu Carrito ({totalItems})</h1>
+          <div>
+            <h1 className="text-5xl font-black text-slate-900 tracking-tighter uppercase italic leading-none">
+              Mi <span className="text-emerald-600">Selección</span>
+            </h1>
+            <p className="text-stone-400 font-bold uppercase tracking-widest text-[10px] mt-2">
+              {totalItems} Artículos listos para envío
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Lista de Productos */}
-          <div className="lg:col-span-2 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          {/* Lista de Productos - Estilo Limpio en Blanco y Café */}
+          <div className="lg:col-span-8 space-y-8">
             {cart.map((item) => (
-              <div key={item.id} className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col sm:flex-row items-center gap-6 transition-all hover:shadow-md">
-                <div className="relative w-32 h-40 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0 shadow-inner">
-                  <Image src={item.image} alt={item.title} fill className="object-cover" />
+              <div key={item.id} className="group flex flex-col sm:flex-row items-center gap-8 pb-8 border-b border-stone-50 last:border-0 transition-all">
+                {/* Imagen con sombra café suave */}
+                <div className="relative w-40 h-52 rounded-2xl overflow-hidden bg-stone-50 flex-shrink-0 shadow-sm border border-stone-100">
+                  <Image src={item.image} alt={item.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 
-                <div className="flex-grow text-center sm:text-left">
-                  <h3 className="font-black text-xl text-slate-900 uppercase tracking-tight">{item.title}</h3>
-                  <p className="text-emerald-600 font-bold text-lg mb-4">${item.price.toFixed(2)} USD</p>
+                <div className="flex-grow flex flex-col justify-between h-full py-2 text-center sm:text-left">
+                  <div>
+                    <h3 className="font-black text-2xl text-slate-900 uppercase tracking-tight mb-1">{item.title}</h3>
+                    <p className="text-stone-400 text-xs font-bold uppercase tracking-widest mb-4 italic">Aura Exclusive Line</p>
+                    <p className="text-emerald-600 font-black text-2xl">${item.price.toFixed(2)} <span className="text-xs text-stone-300 ml-1 italic font-medium uppercase">USD</span></p>
+                  </div>
                   
-                  {/* Controles de Cantidad */}
-                  <div className="flex items-center justify-center sm:justify-start gap-4">
-                    <div className="flex items-center border border-slate-200 rounded-xl p-1 bg-slate-50">
+                  {/* Controles de Cantidad con diseño Minimalista Stone */}
+                  <div className="flex items-center justify-center sm:justify-start gap-6 mt-6">
+                    <div className="flex items-center bg-stone-50 rounded-full border border-stone-100 p-1 shadow-inner">
                       <button 
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="p-2 hover:bg-white rounded-lg transition-colors text-slate-600"
+                        className="w-10 h-10 flex items-center justify-center hover:bg-white rounded-full transition-all text-stone-500 shadow-sm hover:text-emerald-600"
                       >
-                        <Minus size={16} />
+                        <Minus size={14} />
                       </button>
-                      <span className="px-4 font-bold text-slate-900 w-8 text-center">{item.quantity}</span>
+                      <span className="px-5 font-black text-slate-900 text-lg">{item.quantity}</span>
                       <button 
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="p-2 hover:bg-white rounded-lg transition-colors text-slate-600"
+                        className="w-10 h-10 flex items-center justify-center hover:bg-white rounded-full transition-all text-stone-500 shadow-sm hover:text-emerald-600"
                       >
-                        <Plus size={16} />
+                        <Plus size={14} />
                       </button>
                     </div>
+
+                    <button 
+                      onClick={() => removeFromCart(item.id)}
+                      className="flex items-center gap-2 text-stone-300 hover:text-red-500 text-[10px] font-black uppercase tracking-[0.2em] transition-colors"
+                    >
+                      <Trash2 size={16} />
+                      Eliminar
+                    </button>
                   </div>
                 </div>
-
-                <button 
-                  onClick={() => removeFromCart(item.id)}
-                  className="p-4 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all group"
-                >
-                  <Trash2 size={24} className="group-hover:scale-110 transition-transform" />
-                </button>
               </div>
             ))}
           </div>
 
-          {/* Resumen de Compra */}
-          <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl h-fit lg:sticky lg:top-28">
-            <h2 className="text-2xl font-black text-slate-900 mb-8 uppercase tracking-widest">Resumen</h2>
-            
-            <div className="space-y-4 mb-10">
-              <div className="flex justify-between text-slate-500 font-medium">
-                <span>Subtotal</span>
-                <span className="text-slate-900">${totalPrice.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between text-slate-500 font-medium">
-                <span>Envío Estimado</span>
-                <span className="text-emerald-600 font-bold">Gratis</span>
-              </div>
-              <div className="border-t border-slate-100 pt-6 flex justify-between items-end">
-                <div>
-                  <span className="text-sm font-bold text-slate-400 uppercase tracking-tighter">Total a pagar</span>
-                  <p className="text-3xl font-black text-slate-900 leading-none">${totalPrice.toFixed(2)}</p>
+          {/* Resumen de Compra - Tarjeta en Café muy suave (Stone-50) */}
+          <div className="lg:col-span-4">
+            <div className="bg-stone-50 p-10 rounded-[3rem] border border-stone-100 sticky top-32 shadow-sm">
+              <h2 className="text-xs font-black text-stone-400 uppercase tracking-[0.3em] mb-10 text-center">Resumen de Orden</h2>
+              
+              <div className="space-y-6 mb-12">
+                <div className="flex justify-between text-stone-500 font-bold uppercase text-[11px] tracking-widest">
+                  <span>Subtotal</span>
+                  <span className="text-slate-900">${totalPrice.toFixed(2)}</span>
                 </div>
-                <span className="text-xs font-bold text-slate-400 pb-1">USD</span>
+                <div className="flex justify-between text-stone-500 font-bold uppercase text-[11px] tracking-widest">
+                  <span>Envío Premium</span>
+                  <span className="text-emerald-600">Bonificado</span>
+                </div>
+                
+                <div className="pt-8 mt-8 border-t border-stone-200">
+                  <div className="flex justify-between items-end">
+                    <div>
+                      <span className="text-[10px] font-black text-emerald-600 uppercase tracking-[0.2em] block mb-1">Total Final</span>
+                      <p className="text-4xl font-black text-slate-900 leading-none tracking-tighter">${totalPrice.toFixed(2)}</p>
+                    </div>
+                    <span className="text-xs font-black text-stone-300 mb-1">USD</span>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <Link 
-              href="/checkout/success" 
-              className="block w-full text-center py-6 bg-slate-900 text-white rounded-2xl font-black text-xl hover:bg-emerald-600 transition-all shadow-[0_15px_30px_rgba(0,0,0,0.1)] uppercase tracking-widest active:scale-95"
-            >
-              Finalizar Compra
-            </Link>
-            
-            <div className="mt-8 flex items-center justify-center gap-2 text-slate-400">
-              <div className="h-[1px] w-8 bg-slate-100"></div>
-              <p className="text-[10px] uppercase tracking-[0.2em] font-bold">Aura Secure Checkout</p>
-              <div className="h-[1px] w-8 bg-slate-100"></div>
+              {/* Botón Final en Verde Aura */}
+              <Link 
+                href="/checkout" 
+                className="block w-full text-center py-6 bg-emerald-600 text-white rounded-full font-black text-sm hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-100 uppercase tracking-[0.3em] active:scale-95"
+              >
+                Checkout Seguro
+              </Link>
+              
+              <p className="mt-8 text-center text-[9px] text-stone-400 uppercase tracking-[0.2em] font-bold italic">
+                Aura Premium Experience &copy; 2026
+              </p>
             </div>
           </div>
         </div>
