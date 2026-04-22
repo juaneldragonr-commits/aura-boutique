@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aura Boutique 💎
 
-## Getting Started
+Aura Boutique es una plataforma de e-commerce premium, construida con un enfoque en la elegancia visual y una experiencia de usuario robusta. Este proyecto fusiona una paleta de colores sofisticada (esmeralda, piedra y blanco) con una arquitectura de software escalable y modular.
 
-First, run the development server:
+## 🌟 Características Principales
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* **Estética Premium:** Diseño de interfaz enfocado en la limpieza y el minimalismo, utilizando una paleta de colores curada para transmitir exclusividad.
+* **Carrito Persistente:** Implementación robusta de gestión de estado global (`React Context`) sincronizada con `localStorage`, garantizando que la experiencia de compra sea ininterrumpida.
+* **Arquitectura Modular:** Estructura de componentes altamente reutilizables (`Navbar`, `Footer`, `AddToCartButton`) que facilita el mantenimiento y la escalabilidad del proyecto.
+* **Responsive Design:** Interfaz adaptativa construida con **Tailwind CSS**, ofreciendo una experiencia de compra fluida tanto en dispositivos móviles como en escritorio.
+* **Optimización Next.js:** Aprovechamiento del App Router para una navegación rápida y eficiente.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 Tecnologías Utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* **Framework:** [Next.js](https://nextjs.org/) (App Router)
+* **Estilos:** [Tailwind CSS](https://tailwindcss.com/)
+* **Gestión de Estado:** React Context API + Hooks
+* **Almacenamiento:** Browser LocalStorage
+* **Despliegue:** Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Getting Started
 
-## Learn More
+Para clonar y ejecutar este proyecto en tu entorno local:
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clona el repositorio:
+   ```bash
+   git clone <url-de-tu-repositorio>
