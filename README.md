@@ -1,27 +1,27 @@
 # Aura Boutique 💎
 
-Aura Boutique es una plataforma de e-commerce premium, construida con un enfoque en la elegancia visual y una experiencia de usuario robusta. Este proyecto fusiona una paleta de colores sofisticada (esmeralda, piedra y blanco) con una arquitectura de software escalable y modular.
+Aura Boutique is a premium e-commerce platform built with a focus on visual elegance and robust user experience. This project blends a sophisticated color palette (emerald, stone, and white) with scalable and modular software architecture.
 
-## 🌟 Características Principales
+## 🌟 Key Features
 
-* **Estética Premium:** Diseño de interfaz enfocado en la limpieza y el minimalismo, utilizando una paleta de colores curada para transmitir exclusividad.
-* **Carrito Persistente:** Implementación robusta de gestión de estado global (`React Context`) sincronizada con `localStorage`, garantizando que la experiencia de compra sea ininterrumpida.
-* **Arquitectura Modular:** Estructura de componentes altamente reutilizables (`Navbar`, `Footer`, `AddToCartButton`) que facilita el mantenimiento y la escalabilidad del proyecto.
-* **Responsive Design:** Interfaz adaptativa construida con **Tailwind CSS**, ofreciendo una experiencia de compra fluida tanto en dispositivos móviles como en escritorio.
-* **Optimización Next.js:** Aprovechamiento del App Router para una navegación rápida y eficiente.
+* **Premium Aesthetic:** Interface design focused on cleanliness and minimalism, using a curated color palette to convey exclusivity.
+* **Persistent Cart:** Robust implementation of global state management (`React Context`) synchronized with `localStorage`, ensuring an uninterrupted shopping experience.
+* **Modular Architecture:** Highly reusable component structure (`Navbar`, `Footer`, `AddToCartButton`) that facilitates maintenance and project scalability.
+* **Responsive Design:** Adaptive interface built with **Tailwind CSS**, offering a fluid shopping experience on both mobile devices and desktops.
+* **Next.js Optimization:** Leveraging the App Router for fast and efficient navigation.
 
-## 🛠 Tecnologías Utilizadas
+## 🛠 Tech Stack
 
 * **Framework:** [Next.js](https://nextjs.org/) (App Router)
-* **Estilos:** [Tailwind CSS](https://tailwindcss.com/)
-* **Gestión de Estado:** React Context API + Hooks
-* **Almacenamiento:** Browser LocalStorage
-* **Despliegue:** Vercel
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+* **State Management:** React Context API + Hooks
+* **Storage:** Browser LocalStorage
+* **Deployment:** Vercel
 
 ## 🚀 Getting Started
 
-Para clonar y ejecutar este proyecto en tu entorno local:
+To clone and run this project in your local environment:
 
-1. Clona el repositorio:
+1. Clone the repository:
    ```bash
-   git clone <url-de-tu-repositorio>
+   git clone <your-repository-url>
