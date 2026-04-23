@@ -20,10 +20,10 @@ export default function CartPage() {
         
         {/* Título en Negro con acento Verde Esmeralda */}
         <h1 className="text-4xl font-black text-slate-900 mb-3 uppercase tracking-tighter italic">
-          Tu carrito está <span className="text-emerald-600">vacío</span>
+          Your cart is <span className="text-emerald-600">empty</span>
         </h1>
         <p className="text-stone-500 mb-10 text-lg max-w-md leading-relaxed">
-          Parece que aún no has añadido ninguna pieza de nuestra colección premium a tu selección.
+          It looks like you haven't added any items from our premium collection to your selection yet.
         </p>
 
         {/* Botón en Verde Esmeralda */}
@@ -31,7 +31,7 @@ export default function CartPage() {
           href="/" 
           className="bg-emerald-600 text-white px-12 py-5 rounded-full font-bold uppercase tracking-[0.2em] hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-100 hover:scale-105 active:scale-95 text-sm"
         >
-          Explorar Tienda
+          Explore Store
         </Link>
       </main>
     );
@@ -47,10 +47,10 @@ export default function CartPage() {
           </Link>
           <div>
             <h1 className="text-5xl font-black text-slate-900 tracking-tighter uppercase italic leading-none">
-              Mi <span className="text-emerald-600">Selección</span>
+              My <span className="text-emerald-600">Selection</span>
             </h1>
             <p className="text-stone-400 font-bold uppercase tracking-widest text-[10px] mt-2">
-              {totalItems} Artículos listos para envío
+              {totalItems} Items ready for shipping
             </p>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function CartPage() {
                       className="flex items-center gap-2 text-stone-300 hover:text-red-500 text-[10px] font-black uppercase tracking-[0.2em] transition-colors"
                     >
                       <Trash2 size={16} />
-                      Eliminar
+                      Remove
                     </button>
                   </div>
                 </div>
@@ -106,7 +106,7 @@ export default function CartPage() {
           {/* Resumen de Compra - Tarjeta en Café muy suave (Stone-50) */}
           <div className="lg:col-span-4">
             <div className="bg-stone-50 p-10 rounded-[3rem] border border-stone-100 sticky top-32 shadow-sm">
-              <h2 className="text-xs font-black text-stone-400 uppercase tracking-[0.3em] mb-10 text-center">Resumen de Orden</h2>
+              <h2 className="text-xs font-black text-stone-400 uppercase tracking-[0.3em] mb-10 text-center">Order Summary</h2>
               
               <div className="space-y-6 mb-12">
                 <div className="flex justify-between text-stone-500 font-bold uppercase text-[11px] tracking-widest">
@@ -114,14 +114,14 @@ export default function CartPage() {
                   <span className="text-slate-900">${totalPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-stone-500 font-bold uppercase text-[11px] tracking-widest">
-                  <span>Envío Premium</span>
-                  <span className="text-emerald-600">Bonificado</span>
+                  <span>Premium Shipping</span>
+                  <span className="text-emerald-600">Free</span>
                 </div>
                 
                 <div className="pt-8 mt-8 border-t border-stone-200">
                   <div className="flex justify-between items-end">
                     <div>
-                      <span className="text-[10px] font-black text-emerald-600 uppercase tracking-[0.2em] block mb-1">Total Final</span>
+                      <span className="text-[10px] font-black text-emerald-600 uppercase tracking-[0.2em] block mb-1">Final Amount</span>
                       <p className="text-4xl font-black text-slate-900 leading-none tracking-tighter">${totalPrice.toFixed(2)}</p>
                     </div>
                     <span className="text-xs font-black text-stone-300 mb-1">USD</span>
@@ -134,7 +134,7 @@ export default function CartPage() {
                 href="/checkout" 
                 className="block w-full text-center py-6 bg-emerald-600 text-white rounded-full font-black text-sm hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-100 uppercase tracking-[0.3em] active:scale-95"
               >
-                Checkout Seguro
+                Secure Checkout
               </Link>
               
               <p className="mt-8 text-center text-[9px] text-stone-400 uppercase tracking-[0.2em] font-bold italic">

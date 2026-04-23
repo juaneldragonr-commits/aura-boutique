@@ -12,10 +12,10 @@ export default async function CollectionsPage() {
       <div className="max-w-7xl mx-auto pt-10">
         <header className="mb-16">
           <h1 className="text-5xl font-black text-slate-900 mb-4 tracking-tighter uppercase">
-            Colecciones
+            Collections
           </h1>
           <p className="text-slate-500 text-lg font-medium">
-            Explora nuestra selección por categorías
+            Explore our selection by categories
           </p>
         </header>
         
@@ -33,7 +33,7 @@ export default async function CollectionsPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent flex flex-col justify-end p-10">
                 <span className="text-emerald-400 text-sm font-bold uppercase tracking-[0.3em] mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  Descubrir
+                  Discover
                 </span>
                 <h2 className="text-4xl font-black text-white tracking-tight leading-none uppercase">
                   {category.name}

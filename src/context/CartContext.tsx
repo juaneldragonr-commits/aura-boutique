@@ -35,7 +35,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setCart(JSON.parse(savedCart));
       }
     } catch (error) {
-      console.error("Error cargando el carrito del almacenamiento:", error);
+      console.error("Error loading storage cart:", error);
     } finally {
       setIsMounted(true);
     }
@@ -51,7 +51,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addToCart = (product: any) => {
     // Verificación de seguridad: si no hay producto o ID, ignorar
     if (!product || !product.id) {
-      console.error("Producto inválido intentado añadir al carrito", product);
+      console.error("Invalid product attempted to be added to cart", product);
       return;
     }
 
@@ -86,7 +86,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         updatedCart = [...prevCart, newItem];
       }
 
-      console.log("Estado actualizado del carrito:", updatedCart); // Para confirmación en DevTools
+      console.log("Cart status update:", updatedCart); // Para confirmación en DevTools
       return updatedCart;
     });
   };

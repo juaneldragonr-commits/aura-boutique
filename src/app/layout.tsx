@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aura Boutique | Moda Premium",
-  description: "Tu tienda de moda de confianza",
+  title: "Aura Boutique 👓",
+  description: "Your trusted fashion store",
 };
 
 export default function RootLayout({

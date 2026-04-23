@@ -30,8 +30,8 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-10">
-          <Link href="/" className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">Inicio</Link>
-          <Link href="/collections" className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">Colecciones</Link>
+          <Link href="/" className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">Home</Link>
+          <Link href="/collections" className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">Collections</Link>
         </div>
 
         {/* Icons */}
@@ -71,14 +71,14 @@ export default function Navbar() {
             onClick={() => setIsMenuOpen(false)}
             className="text-lg font-black text-slate-900 uppercase tracking-tighter"
           >
-            Inicio
+            Home
           </Link>
           <Link 
             href="/collections" 
             onClick={() => setIsMenuOpen(false)}
             className="text-lg font-black text-slate-900 uppercase tracking-tighter"
           >
-            Colecciones
+            Collections
           </Link>
         </div>
       )}

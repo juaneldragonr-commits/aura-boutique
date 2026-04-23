@@ -33,7 +33,7 @@ export default function AddToCartButton({ product }: { product: any }) {
                  hover:bg-emerald-600 transition-all duration-300 transform active:scale-95
                  shadow-[0_20px_50px_rgba(0,0,0,0.2)] uppercase tracking-widest"
     >
-      Añadir al carrito
+      Add to Cart
     </button>
   );
 }

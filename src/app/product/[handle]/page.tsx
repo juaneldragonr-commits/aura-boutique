@@ -61,7 +61,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
 
             <div className="prose prose-slate">
               <p className="text-base md:text-lg text-slate-500 leading-relaxed">
-                {plainProduct.description || "Una prenda premium diseñada para el estilo y la comodidad en Aura Boutique."}
+                {plainProduct.description || "A premium garment designed for style and comfort at Aura Boutique."}
               </p>
             </div>
 
@@ -72,11 +72,11 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
                 <div className="flex items-center justify-center lg:justify-start gap-2 bg-slate-50 p-3 rounded-xl">
                   <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
-                  Envío Gratuito
+                  Free Shipping
                 </div>
                 <div className="flex items-center justify-center lg:justify-start gap-2 bg-slate-50 p-3 rounded-xl">
                   <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
-                  Garantía Premium
+                  Premium Guarantee
                 </div>
               </div>
             </div>

@@ -50,7 +50,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs">
-              Sin imagen
+              Without Image
             </div>
           )}
         </div>
@@ -69,7 +69,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         onClick={() => addToCart(product)}
         className="w-full mt-4 py-3 bg-slate-900 text-white rounded-xl font-bold text-sm hover:bg-emerald-600 transition-colors active:scale-95 transform"
       >
-        Añadir al carrito
+        Add to Cart 
       </button>
     </motion.div>
   );

@@ -13,23 +13,23 @@ export default function Footer() {
             </span>
           </Link>
           <p className="text-stone-500 text-sm leading-relaxed max-w-xs italic font-medium">
-            Elevando tu estilo cotidiano con prendas premium diseñadas para durar. 
-            Calidad, confort y elegancia en cada costura.
+            Elevating your style daily with premium garments designed to last. 
+            Quality, comfort and elegance in every stitch.
           </p>
         </div>
 
         {/* Enlaces de Tienda - Paleta Café (Stone) con Hover Verde */}
         <div>
-          <h4 className="text-slate-900 font-black uppercase tracking-[0.2em] text-xs mb-8">Tienda</h4>
+          <h4 className="text-slate-900 font-black uppercase tracking-[0.2em] text-xs mb-8">Store</h4>
           <ul className="space-y-4">
             <li>
               <Link href="/productos" className="text-stone-400 hover:text-emerald-600 text-xs font-bold uppercase tracking-widest transition-colors">
-                Todos los productos
+                All Products
               </Link>
             </li>
             <li>
               <Link href="/nueva-coleccion" className="text-stone-400 hover:text-emerald-600 text-xs font-bold uppercase tracking-widest transition-colors">
-                Nueva Colección
+                New Collection
               </Link>
             </li>
             <li>
@@ -42,21 +42,21 @@ export default function Footer() {
 
         {/* Sección de Ayuda */}
         <div>
-          <h4 className="text-slate-900 font-black uppercase tracking-[0.2em] text-xs mb-8">Ayuda</h4>
+          <h4 className="text-slate-900 font-black uppercase tracking-[0.2em] text-xs mb-8">Help</h4>
           <ul className="space-y-4">
             <li>
               <Link href="/envios" className="text-stone-400 hover:text-emerald-600 text-xs font-bold uppercase tracking-widest transition-colors">
-                Envíos y Entregas
+                Shipping and Delivery
               </Link>
             </li>
             <li>
               <Link href="/devoluciones" className="text-stone-400 hover:text-emerald-600 text-xs font-bold uppercase tracking-widest transition-colors">
-                Cambios y Devoluciones
+                Exchanges and Returns
               </Link>
             </li>
             <li>
               <Link href="/contacto" className="text-stone-400 hover:text-emerald-600 text-xs font-bold uppercase tracking-widest transition-colors">
-                Contacto
+                Contact
               </Link>
             </li>
           </ul>
@@ -66,19 +66,19 @@ export default function Footer() {
       {/* Barra Inferior - Minimalismo en Blanco y Verde */}
       <div className="max-w-7xl mx-auto px-6 pt-10 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-6">
         <p className="text-[10px] text-stone-300 font-black uppercase tracking-[0.3em]">
-          &copy; 2026 AURA BOUTIQUE. TODOS LOS DERECHOS RESERVADOS.
+          &copy; 2026 AURA BOUTIQUE. ALL RIGHTS RESERVED.
         </p>
         
         <div className="flex flex-wrap justify-center gap-8 items-center">
           <span className="text-[10px] text-emerald-600 font-black uppercase tracking-[0.2em] bg-emerald-50 px-4 py-1 rounded-full">
-            Hecho por Juan David Rianho
+            Made by Juan David Rianho
           </span>
           <div className="flex gap-4">
             <Link href="/privacidad" className="text-[10px] text-stone-300 hover:text-slate-900 font-bold uppercase tracking-widest transition-colors">
-              Privacidad
+              Privacy
             </Link>
             <Link href="/terminos" className="text-[10px] text-stone-300 hover:text-slate-900 font-bold uppercase tracking-widest transition-colors">
-              Términos
+              Terms 
             </Link>
           </div>
         </div>

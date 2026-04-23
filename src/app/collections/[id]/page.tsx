@@ -19,17 +19,17 @@ export default async function CategoryPage({ params }: { params: { id: string } 
             <ArrowLeft size={20} className="text-slate-600" />
           </Link>
           <div>
-            <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest">Colección</span>
-            <h1 className="text-4xl font-black text-slate-900 leading-none">Resultados</h1>
+            <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest">Collection</span>
+            <h1 className="text-4xl font-black text-slate-900 leading-none">Results</h1>
           </div>
         </div>
 
         {/* Listado de Productos Filtrados */}
         {products.length === 0 ? (
           <div className="text-center py-32 bg-white rounded-[3rem] border border-dashed border-slate-300">
-            <p className="text-slate-400 text-xl font-medium">No encontramos productos en esta categoría.</p>
+            <p className="text-slate-400 text-xl font-medium">No products found in this category.</p>
             <Link href="/collections" className="text-emerald-600 font-bold mt-4 inline-block hover:underline">
-              Ver otras colecciones
+              View other collections
             </Link>
           </div>
         ) : (
