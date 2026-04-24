@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="bg-white border-t border-stone-100 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
         
-        {/* Sección de Marca - Branding en Negro y Verde */}
+        {/* Sección de Marca */}
         <div className="space-y-6">
           <Link href="/" className="inline-block">
             <span className="text-3xl font-black text-slate-900 tracking-tighter uppercase italic">
@@ -18,7 +18,7 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Enlaces de Tienda - Paleta Café (Stone) con Hover Verde */}
+        {/* Enlaces de Tienda */}
         <div>
           <h4 className="text-slate-900 font-black uppercase tracking-[0.2em] text-xs mb-8">Store</h4>
           <ul className="space-y-4">
@@ -63,7 +63,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Barra Inferior - Minimalismo en Blanco y Verde */}
+      {/* Barra Inferior */}
       <div className="max-w-7xl mx-auto px-6 pt-10 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-6">
         <p className="text-[10px] text-stone-300 font-black uppercase tracking-[0.3em]">
           &copy; 2026 AURA BOUTIQUE. ALL RIGHTS RESERVED.
@@ -74,10 +74,11 @@ export default function Footer() {
             Made by Juan David Rianho
           </span>
           <div className="flex gap-4">
-            <Link href="/privacidad" className="text-[10px] text-stone-300 hover:text-slate-900 font-bold uppercase tracking-widest transition-colors">
+            {/* Rutas corregidas para apuntar a las carpetas /privacy y /terms */}
+            <Link href="/privacy" className="text-[10px] text-stone-300 hover:text-slate-900 font-bold uppercase tracking-widest transition-colors">
               Privacy
             </Link>
-            <Link href="/terminos" className="text-[10px] text-stone-300 hover:text-slate-900 font-bold uppercase tracking-widest transition-colors">
+            <Link href="/terms" className="text-[10px] text-stone-300 hover:text-slate-900 font-bold uppercase tracking-widest transition-colors">
               Terms 
             </Link>
           </div>

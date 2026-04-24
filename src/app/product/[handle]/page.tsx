@@ -1,7 +1,7 @@
 import { getShopifyProductByHandle, getProductsByCategory } from "@/src/lib/shopify";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import AddToCartButton from "../../../components/AddToCartButton";
+import ProductImage from "@/src/components/ProductImage"; // Importa el componente
 
 export default async function ProductPage({ params }: { params: Promise<{ handle: string }> }) {
   const { handle } = await params;
@@ -14,7 +14,6 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
 
   if (!product) notFound();
 
-  // Mapeamos el producto para asegurar que los datos lleguen limpios al componente cliente
   const plainProduct = {
     id: product.id,
     title: product.title,
@@ -32,13 +31,11 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
           {/* Contenedor de Imagen */}
           <div className="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none">
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-50 shadow-lg md:shadow-2xl">
-              <Image
-                src={plainProduct.image}
-                alt={plainProduct.title}
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, 40vw"
+              {/* Usamos nuestro componente cliente para manejar el error de imagen */}
+              <ProductImage 
+                src={plainProduct.image} 
+                alt={plainProduct.title} 
+                productId={plainProduct.id} 
               />
             </div>
           </div>
@@ -66,7 +63,6 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
             </div>
 
             <div className="pt-6 border-t border-slate-100 w-full">
-              {/* Pasamos el objeto mapeado para evitar errores de hidratación */}
               <AddToCartButton product={plainProduct} />
               
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">

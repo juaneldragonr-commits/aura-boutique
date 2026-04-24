@@ -13,7 +13,7 @@ const MOCK_PRODUCTS = Array.from({ length: 50 }, (_, i) => ({
   id: (i + 1).toString(),
   title: `Aura Style Item ${i + 1}`,
   handle: `aura-style-item-${i + 1}`,
-  description: "Una prenda premium diseñada para el estilo y la comodidad en Aura Boutique.",
+  description: "A premium garment designed for style and comfort at Aura Boutique.",
   price: parseFloat((Math.random() * (100 - 20) + 20).toFixed(2)),
   // Usamos el array extendido para mayor variedad visual
   image: `https://images.unsplash.com/photo-${FASHION_IMAGES[i % FASHION_IMAGES.length]}?auto=format&fit=crop&w=600&h=800&q=80`,

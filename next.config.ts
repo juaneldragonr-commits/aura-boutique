@@ -25,17 +25,21 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'placeimg.com', // Agregado: Común en placeholders de la API
+        hostname: 'placeimg.com',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'picsum.photos', // Agregado: Muy usado para imágenes aleatorias
+        hostname: 'picsum.photos',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'loremflickr.com',
         pathname: '/**',
       },
     ],
   },
-  // Opcional: Esto ayuda si tienes problemas con librerías que no son compatibles con Turbopack todavía
   experimental: {
     serverActions: {
       bodySizeLimit: '2mb',
