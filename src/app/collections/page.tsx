@@ -1,11 +1,16 @@
 import Link from "next/link";
-import { getCategories } from "@/src/lib/shopify";
+import { MOCK_PRODUCTS } from "../../lib/mock-products";
 
-export default async function CollectionsPage() {
-  const categories = await getCategories();
-
-  // Mostramos las primeras 5 categorías para mantener el diseño limpio
-  const mainCategories = categories.slice(0, 5);
+export default function CollectionsPage() {
+  // Extraemos las categorías únicas de tus productos y creamos una estructura para la UI
+  const categories = Array.from(new Set(MOCK_PRODUCTS.map((p) => p.category))).map(
+    (category) => ({
+      id: category,
+      name: category,
+      // Tomamos la imagen del primer producto que encontremos en esa categoría
+      image: MOCK_PRODUCTS.find((p) => p.category === category)?.image || "/placeholder.jpg",
+    })
+  );
 
   return (
     <main className="min-h-screen bg-white p-8 lg:p-20">
@@ -15,12 +20,12 @@ export default async function CollectionsPage() {
             Collections
           </h1>
           <p className="text-slate-500 text-lg font-medium">
-            Explore our selection by categories
+            Explore our curated selection
           </p>
         </header>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {mainCategories.map((category: any) => (
+          {categories.map((category) => (
             <Link 
               key={category.id} 
               href={`/collections/${category.id}`}
@@ -35,7 +40,7 @@ export default async function CollectionsPage() {
                 <span className="text-emerald-400 text-sm font-bold uppercase tracking-[0.3em] mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   Discover
                 </span>
-                <h2 className="text-4xl font-black text-white tracking-tight leading-none uppercase">
+                <h2 className="text-4xl font-black text-white tracking-tight leading-none uppercase capitalize">
                   {category.name}
                 </h2>
               </div>
