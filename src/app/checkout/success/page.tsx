@@ -36,12 +36,14 @@ export default function SuccessPage() {
 
         {/* Botones de acción */}
         <div className="space-y-3">
-          <Link href="/">
+          {/* AQUÍ HE ACTUALIZADO LA RUTA AL ARCHIVO NUEVO */}
+          <Link href="/checkout/success/order-details">
             <button className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition-all">
               <Package size={18} />
               View Order Details
             </button>
           </Link>
+          
           <Link href="/">
             <button className="w-full flex items-center justify-center gap-2 text-slate-500 py-3 rounded-xl font-medium hover:text-slate-900 transition-all">
               <Home size={18} />
