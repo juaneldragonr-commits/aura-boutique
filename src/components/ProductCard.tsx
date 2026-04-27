@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useCart } from "@/src/context/CartContext";
+import { useCart } from "@/context/CartContext";
 
 interface ProductCardProps {
   product: {

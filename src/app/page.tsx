@@ -1,5 +1,5 @@
-import { getShopifyProducts } from "@/src/lib/shopify";
-import ProductCard from "@/src/components/ProductCard";
+import { getShopifyProducts } from "@/lib/shopify";
+import ProductCard from "@/components/ProductCard";
 
 export default async function Home() {
   const products = await getShopifyProducts();

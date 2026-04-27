@@ -1,5 +1,6 @@
 "use client";
-import { useCart } from "@/src/context/CartContext";
+
+import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 import { Trash2, ArrowLeft, ShoppingBag, Plus, Minus } from "lucide-react";
@@ -58,8 +59,9 @@ export default function CartPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* Lista de Productos - Estilo Limpio en Blanco y Café */}
           <div className="lg:col-span-8 space-y-8">
-            {cart.map((item) => (
-              <div key={item.id} className="group flex flex-col sm:flex-row items-center gap-8 pb-8 border-b border-stone-50 last:border-0 transition-all">
+            {/* SE APLICÓ LA CORRECCIÓN AQUÍ: agregamos index y key compuesta */}
+            {cart.map((item, index) => (
+              <div key={`${item.id}-${index}`} className="group flex flex-col sm:flex-row items-center gap-8 pb-8 border-b border-stone-50 last:border-0 transition-all">
                 {/* Imagen con sombra café suave */}
                 <div className="relative w-40 h-52 rounded-2xl overflow-hidden bg-stone-50 flex-shrink-0 shadow-sm border border-stone-100">
                   <Image src={item.image} alt={item.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />

@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // Necesario para redirigir
-import { useCart } from "@/src/context/CartContext";
+import { useRouter } from "next/navigation";
+import { useCart } from "../context/CartContext"; // Ruta corregida
 import { ShoppingBag, User, Search, Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -11,12 +11,10 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const router = useRouter(); // Hook para navegar
+  const router = useRouter();
 
-  // Función de búsqueda
   const handleSearch = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && searchQuery.trim() !== "") {
-      // Redirige a la página de búsqueda con el query
       router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
       setIsSearchOpen(false);
       setSearchQuery("");
@@ -27,10 +25,10 @@ export default function Navbar() {
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         
-        {/* Left: Mobile Menu + Logo */}
+        {/* Left: Mobile Menu Button + Logo */}
         <div className="flex items-center gap-4">
           <button 
-            className="lg:hidden p-2 text-slate-600"
+            className="lg:hidden p-2 text-slate-600 hover:bg-slate-50 rounded-full"
             onClick={() => {
               setIsMenuOpen(!isMenuOpen);
               setIsSearchOpen(false);
@@ -52,19 +50,18 @@ export default function Navbar() {
           <Link href="/collections" className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">Collections</Link>
         </div>
 
-        {/* Right: Search Bar or Icons */}
+        {/* Right: Search Bar and Icons */}
         <div className="flex items-center gap-4">
           {isSearchOpen ? (
             <div className="flex items-center animate-in fade-in slide-in-from-right-4 duration-300">
               <input
                 type="text"
                 autoFocus
-                placeholder="Search products..."
+                placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={handleSearch}
-                // CLASES DE VISIBILIDAD CORREGIDAS:
-                className="w-48 md:w-64 bg-white border border-slate-200 rounded-full py-2 pl-4 pr-4 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm"
+                className="w-40 md:w-48 bg-white border border-slate-200 rounded-full py-2 pl-4 pr-4 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm"
               />
               <button 
                 onClick={() => { setIsSearchOpen(false); setSearchQuery(""); }}
@@ -90,7 +87,7 @@ export default function Navbar() {
                 href="/cart" 
                 className="p-2 text-slate-600 hover:bg-slate-50 rounded-full transition-all relative group"
               >
-                <ShoppingBag size={22} className="group-hover:scale-110 transition-transform" />
+                <ShoppingBag size={22} />
                 {isMounted && totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-emerald-600 text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-white animate-in zoom-in duration-300">
                     {totalItems}
@@ -101,6 +98,15 @@ export default function Navbar() {
           )}
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className="lg:hidden absolute top-20 w-full bg-white border-b border-slate-100 p-6 flex flex-col gap-6 animate-in slide-in-from-top-4">
+          <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold text-slate-900 uppercase">Home</Link>
+          <Link href="/collections" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold text-slate-900 uppercase">Collections</Link>
+          <Link href="/profile" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold text-slate-900 uppercase">Profile</Link>
+        </div>
+      )}
     </nav>
   );
 }

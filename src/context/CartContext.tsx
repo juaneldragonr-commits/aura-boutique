@@ -1,4 +1,6 @@
+// src/context/CartContext.tsx
 "use client";
+
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 interface CartItem {
@@ -27,8 +29,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isMounted, setIsMounted] = useState(false);
 
-  // 1. Cargar datos del localStorage al montar con manejo de errores robusto
+  // 1. Cargar datos del localStorage
   useEffect(() => {
+    setIsMounted(true);
     try {
       const savedCart = localStorage.getItem("aura-cart");
       if (savedCart) {
@@ -36,12 +39,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
     } catch (error) {
       console.error("Error loading storage cart:", error);
-    } finally {
-      setIsMounted(true);
     }
   }, []);
 
-  // 2. Guardar en localStorage de forma sincronizada cada vez que el carrito cambie
+  // 2. Guardar cambios en localStorage
   useEffect(() => {
     if (isMounted) {
       localStorage.setItem("aura-cart", JSON.stringify(cart));
@@ -49,45 +50,37 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [cart, isMounted]);
 
   const addToCart = (product: any) => {
-    // Verificación de seguridad: si no hay producto o ID, ignorar
     if (!product || !product.id) {
-      console.error("Invalid product attempted to be added to cart", product);
+      console.error("Invalid product:", product);
       return;
     }
 
     setCart((prevCart) => {
-      const productId = product.id;
-      const existingItem = prevCart.find((item) => item.id === productId);
+      const existingItem = prevCart.find((item) => item.id === product.id);
       
-      let updatedCart;
-
       if (existingItem) {
-        updatedCart = prevCart.map((item) =>
-          item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+        return prevCart.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         );
-      } else {
-        // Normalización para asegurar tipos de datos correctos
-        const price = product.priceRange 
-          ? parseFloat(product.priceRange.minVariantPrice.amount) 
-          : (typeof product.price === 'string' ? parseFloat(product.price) : product.price);
-
-        const image = product.images?.nodes 
-          ? product.images.nodes[0]?.url 
-          : (product.image?.url || product.image);
-
-        const newItem: CartItem = {
-          id: productId,
-          title: product.title || "Producto sin título",
-          price: price || 0,
-          image: image || "",
-          handle: product.handle || "",
-          quantity: 1,
-        };
-        updatedCart = [...prevCart, newItem];
       }
 
-      console.log("Cart status update:", updatedCart); // Para confirmación en DevTools
-      return updatedCart;
+      // Normalización de datos (asegurando tipos)
+      const priceVal = typeof product.price === 'string' 
+        ? parseFloat(product.price.replace(/[^0-9.]/g, '')) 
+        : (product.price || 0);
+
+      const imageVal = product.image?.url || product.image || "";
+
+      const newItem: CartItem = {
+        id: product.id,
+        title: product.title || "Untitled Product",
+        price: priceVal,
+        image: imageVal,
+        handle: product.handle || "",
+        quantity: 1,
+      };
+
+      return [...prevCart, newItem];
     });
   };
 
@@ -96,7 +89,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const updateQuantity = (id: string | number, quantity: number) => {
-    if (quantity < 1) return;
+    if (quantity < 1) {
+      removeFromCart(id);
+      return;
+    }
     setCart((prev) =>
       prev.map((item) => (item.id === id ? { ...item, quantity } : item))
     );
@@ -104,12 +100,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = () => {
     setCart([]);
-    localStorage.removeItem("aura-cart");
   };
 
-  // Cálculos derivados del estado
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-  const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
   return (
     <CartContext.Provider 
@@ -131,6 +125,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
 export const useCart = () => {
   const context = useContext(CartContext);
-  if (!context) throw new Error("useCart debe usarse dentro de un CartProvider");
+  if (!context) throw new Error("useCart must be used within a CartProvider");
   return context;
 };
