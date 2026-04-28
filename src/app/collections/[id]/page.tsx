@@ -1,5 +1,5 @@
-import { getProductsByCategory } from "@/src/lib/shopify";
-import ProductCard from "@/src/components/ProductCard";
+import { getProductsByCategory } from "@/lib/shopify";
+import ProductCard from "@/components/ProductCard";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 

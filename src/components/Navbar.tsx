@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCart } from "../context/CartContext"; // Ruta corregida
+import { useCart } from "../context/CartContext";
 import { ShoppingBag, User, Search, Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -14,8 +14,8 @@ export default function Navbar() {
   const router = useRouter();
 
   const handleSearch = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && searchQuery.trim() !== "") {
-      router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+    if (e.key === 'Enter') {
+      router.push("/collections");
       setIsSearchOpen(false);
       setSearchQuery("");
     }

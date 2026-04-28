@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useCart } from '@/src/context/CartContext'; // Importamos el hook del contexto
+import { useCart } from '@/context/CartContext'; // Importamos el hook del contexto
 
 interface Product {
   id: string | number;
